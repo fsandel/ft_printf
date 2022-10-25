@@ -6,7 +6,7 @@
 /*   By: fsandel <fsandel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:40:21 by fsandel           #+#    #+#             */
-/*   Updated: 2022/10/24 18:26:01 by fsandel          ###   ########.fr       */
+/*   Updated: 2022/10/25 18:18:43 by fsandel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,27 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include "libft/libft.h"
 
-int	ft_printf(const char *str, ...);
+int		ft_printf(const char *str, ...);
 
-void	ft_putchar(char c);
-void	ft_putstr(char *s);
-void	ft_putnbr(int n);
-void	*ft_calloc(size_t nitems, size_t size);
-void	*ft_bzero(char *str, size_t n);
-size_t	ft_strlen(const char *str);
+char	*ft_argument(va_list arg, char a);
+
+char	*ft_print_char(va_list arg);
+char	*ft_print_str(va_list arg);
+char	*ft_print_void(va_list arg);
+char	*ft_print_deci(va_list arg);
+char	*ft_print_int(va_list arg);
+char	*ft_print_unsi(va_list arg);
+char	*ft_print_hexa_low(va_list arg);
+char	*ft_print_hexa_up(va_list arg);
+char	*ft_print_perc(va_list arg);
+
+char	*ft_rev_string(char *str);
+char	*ft_unsi_itoa(unsigned int i);
+int		ft_unsi_num_len(unsigned int i);
+
+
 
 
 #endif

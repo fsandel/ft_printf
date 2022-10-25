@@ -6,20 +6,22 @@
 /*   By: fsandel <fsandel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:31:39 by fsandel           #+#    #+#             */
-/*   Updated: 2022/10/24 19:00:08 by fsandel          ###   ########.fr       */
+/*   Updated: 2022/10/25 18:34:38 by fsandel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
 int	main(void)
 {
-	int	i;
-	char *str = "test";
-	i = 300;
-	//ft_printf("s: %s %i\n", "string", 3);
-	printf("hexalow: %c!!!!!\n", str);
-	ft_printf("hexalow: %c!!!!!\n", str);
+	char			*str = "test";
+	char			c = 'c';
+	unsigned int	i;
+	i = -5;
+	char	*main_string = "%p";
+	printf("     og return: %d\n", 	printf(main_string, c));
+	printf("     my return: %d\n", 	ft_printf(main_string, i));
+
+
 
 }
