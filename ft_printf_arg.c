@@ -6,7 +6,7 @@
 /*   By: fsandel <fsandel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:22:28 by fsandel           #+#    #+#             */
-/*   Updated: 2022/10/28 14:49:03 by fsandel          ###   ########.fr       */
+/*   Updated: 2022/10/28 15:01:02 by fsandel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,33 +20,36 @@ int	ft_print_char(va_list arg)
 
 int	ft_print_str(va_list arg)
 {
-	char	*output;
+	char	*str;
 	int		len;
 
-	output = va_arg(arg, char *);
-	if (output == NULL)
+	str = va_arg(arg, char *);
+	if (str == NULL)
 	{
 		ft_putstr_fd("(null)", 1);
 		return (6);
 	}
-	len = ft_strlen(output);
-	ft_putstr_fd(output, 1);
+	len = ft_strlen(str);
+	ft_putstr_fd(str, 1);
 	return (len);
 }
 
 int	ft_print_void(va_list arg)
 {
-	unsigned long	arg_int;
+	unsigned long	arg_long;
 	int				len;
-	char			*hexa;
+	char			*hex;
 
-	arg_int = va_arg(arg, unsigned long);
-	if (arg_int == 0)
-		return (write(1, "0x0", 3));
-	hexa = ft_int_to_hex(arg_int);
 	ft_putstr_fd("0x", 1);
-	len = write(1, hexa, ft_strlen(hexa));
-	free(hexa);
+	arg_long = va_arg(arg, unsigned long);
+	if (arg_long == 0)
+	{
+		write(1, "0", 1);
+		return (3);
+	}
+	hex = ft_int_to_hex(arg_long);
+	len = write(1, hex, ft_strlen(hex));
+	free(hex);
 	return (len + 2);
 }
 

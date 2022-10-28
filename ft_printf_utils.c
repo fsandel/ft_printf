@@ -6,7 +6,7 @@
 /*   By: fsandel <fsandel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 14:35:37 by fsandel           #+#    #+#             */
-/*   Updated: 2022/10/28 14:49:09 by fsandel          ###   ########.fr       */
+/*   Updated: 2022/10/28 15:45:01 by fsandel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,31 @@ char	*ft_rev_string(char *str)
 
 char	*ft_int_to_hex(unsigned long arg_int)
 {
-	char	*hexa;
-	int		i;
-	int		temp;
+	char			*hex;
+	int				i;
+	int				temp;
+	unsigned long	arg_copy;
+	int				size;
 
+	arg_copy = arg_int;
+	size = 3;
+	while (arg_copy > 16 && size++)
+		arg_copy /= 16;
 	if (arg_int == 0)
 		return (ft_strdup("0"));
-	hexa = ft_calloc(30, 1);
+	hex = ft_calloc(size, 1);
 	i = 0;
 	while (arg_int != 0)
 	{
 		temp = arg_int % 16;
 		if (temp < 10)
-			hexa[i++] = temp + '0';
+			hex[i++] = temp + '0';
 		else
-			hexa[i++] = temp + 'a' - 10;
+			hex[i++] = temp + 'a' - 10;
 		arg_int = arg_int / 16;
 	}
-	hexa = ft_rev_string(hexa);
-	return (hexa);
+	hex = ft_rev_string(hex);
+	return (hex);
 }
 
 int	ft_num_len(int n)

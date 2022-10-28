@@ -6,7 +6,7 @@
 /*   By: fsandel <fsandel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:40:21 by fsandel           #+#    #+#             */
-/*   Updated: 2022/10/28 14:52:48 by fsandel          ###   ########.fr       */
+/*   Updated: 2022/10/28 15:45:44 by fsandel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
-# include <stdio.h>
 # include "libft/libft.h"
 
 int		ft_printf(const char *str, ...);
