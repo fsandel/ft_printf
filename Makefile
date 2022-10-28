@@ -6,7 +6,7 @@
 #    By: fsandel <fsandel@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/24 14:34:39 by fsandel           #+#    #+#              #
-#    Updated: 2022/10/28 15:31:17 by fsandel          ###   ########.fr        #
+#    Updated: 2022/10/28 15:50:08 by fsandel          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,6 @@ RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror
 AFLAGS		= ar -rcs
 NAME		= libftprintf.a
-EXEC		= ft_printf.out
-MAIN		= main.c
 
 SRCS		= 	ft_printf.c \
 				ft_printf_arg.c \
@@ -50,9 +48,5 @@ fclean:		clean
 			$(RM) $(NAME)
 
 re:			fclean $(NAME)
-
-run:		$(NAME)
-			$(CC) -o $(EXEC) $(SRCS) $(LIBFTSRCS) $(MAIN) -L. -lftprintf
-			./$(EXEC)
 
 .PHONY:		all clean fclean re run
