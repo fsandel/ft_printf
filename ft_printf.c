@@ -6,15 +6,18 @@
 /*   By: fsandel <fsandel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 14:38:43 by fsandel           #+#    #+#             */
-/*   Updated: 2022/10/25 17:53:37 by fsandel          ###   ########.fr       */
+/*   Updated: 2022/10/27 16:37:56 by fsandel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-char	*ft_argument(va_list arg, char a)
+int	ft_putstr_return(char *str);
+int	ft_putchar_return(char c);
+
+int	ft_argument(va_list arg, char a)
 {
-	char *output;
+	int	output;
 
 	if (a == 'c')
 		output = ft_print_char(arg);
@@ -39,7 +42,6 @@ char	*ft_argument(va_list arg, char a)
 
 int	ft_printf(const char *print_string, ...)
 {
-	char	*current;
 	int		i;
 	int		total;
 	va_list	arg;
@@ -52,17 +54,29 @@ int	ft_printf(const char *print_string, ...)
 		if (print_string[i] == '%' && print_string[i + 1])
 		{
 			i++;
-			current = ft_argument(arg, print_string[i]);
-			ft_putstr_fd(current, 2);
-			total += ft_strlen(current);
+
+			total += ft_argument(arg, print_string[i]);
 		}
 		else
-		{
-			ft_putchar_fd(print_string[i], 2);
-			total++;
-		}
+			total += ft_putchar_return(print_string[i]);
 		i++;
 	}
 	va_end(arg);
 	return (total);
+}
+
+int	ft_putstr_return(char *str)
+{
+	int	len;
+	
+	ft_putstr_fd(str, 1);
+	len = ft_strlen(str);
+
+	return (len);
+}
+
+int	ft_putchar_return(char c)
+{
+	ft_putchar_fd(c, 1);
+	return (1);
 }

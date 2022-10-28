@@ -6,117 +6,74 @@
 /*   By: fsandel <fsandel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 11:22:28 by fsandel           #+#    #+#             */
-/*   Updated: 2022/10/25 18:20:29 by fsandel          ###   ########.fr       */
+/*   Updated: 2022/10/27 17:57:30 by fsandel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
+#include "libft/libft.h"
 
-char	*ft_print_char(va_list arg)
+int	ft_print_char(va_list arg)
+{
+	ft_putchar_fd(va_arg(arg, int), 1);
+	return (1);
+}
+
+int	ft_print_str(va_list arg)
 {
 	char	*output;
+	int		len;
 
-	output = ft_calloc(2,1);
-	output[0] = va_arg(arg, int); 
-	return (output);
-}
-
-char	*ft_print_str(va_list arg)
-{
-	char *output;
-
-	output = ft_strdup((const char *)va_arg(arg, char*));
-	return (output);
-}
-
-char	*ft_print_void(va_list arg)
-{
-	char *output;
-
-	output = ft_strdup("void");
-	return (output);
-}
-
-char	*ft_print_deci(va_list arg)
-{
-	char *output;
-
-	output = ft_itoa(va_arg(arg, int));
-	return (output);
-}
-
-char	*ft_print_int(va_list arg)
-{
-	char *output;
-
-	output = ft_itoa(va_arg(arg, int));
-	return (output);
-}
-
-char	*ft_print_unsi(va_list arg)
-{
-	char *output;
-
-	output = ft_unsi_itoa(va_arg(arg, unsigned int));
-	return (output);
-
-}
-
-char	*ft_print_hexa_low(va_list arg)
-{
-	char	*hexa;
-	char	*output;
-	int		i;
-	int		temp;
-	int		arg_int;
-
-	arg_int = va_arg(arg, int);
-	hexa = ft_calloc(30, 1);
-	i = 0;
-	while (arg_int != 0)
+	output = va_arg(arg, char *);
+	if (output == NULL)
 	{
-		temp = arg_int % 16;
-		if (temp < 10)
-			hexa[i++] = temp + '0';
-		else
-			hexa[i++] = temp + 'a' - 10;
-		arg_int = arg_int / 16;
+		ft_putstr_fd("(null)", 1);
+		return (6);
 	}
-	output = ft_rev_string(hexa);
-	free(hexa);
-	return (output);
+	len = ft_strlen(output);
+	ft_putstr_fd(output, 1);
+	//free(output);
+	return (len);
 }
 
-char	*ft_print_hexa_up(va_list arg)
+int	ft_print_void(va_list arg)
 {
-	char	*hexa;
-	char	*output;
-	int		i;
-	int		temp;
-	int		arg_int;
+	char		*output;
+	uintptr_t	ptr_num;
+	int			len;
 
-	arg_int = va_arg(arg, int);
-	hexa = ft_calloc(30, 1);
-	i = 0;
-	temp = 0;
-	while (arg_int != 0)
-	{
-		temp = arg_int % 16;
-		if (temp < 10)
-			hexa[i++] = temp + '0';
-		else
-			hexa[i++] = temp + 'A' - 10;
-		arg_int = arg_int / 16;
-	}
-	output = ft_rev_string(hexa);
-	free(hexa);
-	return (output);
+	ptr_num = (uintptr_t)va_arg(arg, uintptr_t);
+	//if (ptr_num == NULL)
+	//{
+	//	ft_putstr_fd("0x0", 1);
+	//	return (3);
+	//}
+	output = ft_int_to_hex(ptr_num);
+	ft_putstr_fd("0x", 1);
+	ft_putstr_fd(output, 1);
+	len = ft_strlen(output);
+	free(output);
+	return (len + 2);
 }
 
-char	*ft_print_perc(va_list arg)
+int	ft_print_deci(va_list arg)
 {
-	char *output;
+	int		nb;
+	int		len;
 
-	output = ft_strdup("%");
-	return (output);
+	nb = va_arg(arg, int);
+	len = ft_num_len(nb);
+	ft_putnbr_fd(nb, 1);
+	return (len);
+}
+
+int	ft_print_int(va_list arg)
+{
+	int		nb;
+	int		len;
+
+	nb = va_arg(arg, int);
+	len = ft_num_len(nb);
+	ft_putnbr_fd(nb, 1);
+	return (len);
 }
